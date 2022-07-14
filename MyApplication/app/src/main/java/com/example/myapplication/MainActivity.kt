@@ -2,7 +2,8 @@ package com.example.myapplication
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
+import android.widget.TextView
+
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -11,25 +12,62 @@ class MainActivity : AppCompatActivity() {
 
         // Exercise 1
         val array = intArrayOf(2, 4, 6, 8, 10, 12, 14, 16, 18, 20)
-        Log.d("Exercise 1","Average Array: ${averageList(*array)}")
+
+        val textview1 = findViewById<TextView>(R.id.TextView4)
+        val textview2 = findViewById<TextView>(R.id.TextView1)
+
+        // Print value
+        for (index in 0..array.lastIndex)
+        {
+            textview1.append(array[index].toString())
+            if (index != array.lastIndex)
+            {
+                textview1.append(", ")
+            }
+        }
+        textview2.text = averageList(*array).toString()
 
         // Exercise 2
         val listStr = mutableListOf("Kratos", "Ophion", "Thanatos", "Leto", "Iris", "Nemesis")
         val result = getFirstChar(*listStr.toTypedArray())
 
-        Log.d("Exercise 2", "List String: $listStr")
-        Log.d("Exercise 2", "First character: $result")
+        val textview3 = findViewById<TextView>(R.id.TextView6)
+        val textview4 = findViewById<TextView>(R.id.TextView8)
+
+        // Print value
+        textview3.text = listStr.toString()
+        textview4.text = result
 
         // Exercise 3
         val listNum = intArrayOf(1 ,2 ,3 ,4 ,5, 6, 7, 8)
-        Log.d("Exercise 3", "Element in even position:")
-        posIndexEven(*listNum)
+        val numEvenPos = posIndexEven(*listNum)
+
+        val textview5 = findViewById<TextView>(R.id.TextView10)
+        val textview6 = findViewById<TextView>(R.id.TextView12)
+
+        // Print value
+        for (index in 0..listNum.lastIndex)
+        {
+            textview5.append(listNum[index].toString())
+            if (index != listNum.lastIndex)
+            {
+                textview5.append(", ")
+            }
+        }
+        textview6.text = numEvenPos.toString()
 
         // Exercise 4
         val god1 = "Gaia"
         val god2 = "Apollo"
-        overFiveChar(god1)
-        overFiveChar(god2)
+        val result1 = overFiveChar(god1)
+        val result2 = overFiveChar(god2)
+
+        val textview7 = findViewById<TextView>(R.id.TextView14)
+        val textview8 = findViewById<TextView>(R.id.TextView16)
+
+        // Print value
+        textview7.text = god2
+        textview8.text = result2
     }
 }
 
@@ -53,21 +91,24 @@ fun getFirstChar(vararg listStr: String): String
     return listFirstCharacter
 }
 
-fun posIndexEven(vararg listNumber: Int)
+fun posIndexEven(vararg listNumber: Int): List<Int>
 {
+    val numEven = mutableListOf<Int>()
     for (index: Int in 0..listNumber.lastIndex)
     {
         if (index % 2 == 0)
         {
-            Log.d("Exercise 3", "Number[$index] = ${listNumber[index]}")
+            numEven.add(listNumber[index])
         }
     }
+
+    return numEven
 }
 
-fun overFiveChar(str: String)
+fun overFiveChar(str: String): String
 {
-    if (str.length > 5)
-        Log.d("Exercise 4", "String $str length ${str.length}")
+    return if (str.length > 5)
+        "String $str length ${str.length}"
     else
-        Log.d("Exercise 4", "String $str has no length greater than 5")
+        "String $str has no length greater than 5"
 }
