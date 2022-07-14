@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/purple_200"
+    tools:context=".MainActivity">
+
+    <!--Ctrl + space -> show suggest-->
+
+    <!--    <View-->
+    <!--        android:id="@+id/layer1"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="500dp"-->
+    <!--        android:background="@color/purple_500" />-->
+
+    <!--    <View-->
+    <!--        android:id="@+id/layer2"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="300dp"-->
+    <!--        android:background="@color/teal_200" />-->
+
+    <!--    <View-->
+    <!--        android:id="@+id/layer3"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="100dp"-->
+    <!--        android:background="@color/teal_700" />-->
+
+    <!--    <TextView-->
+    <!--        android:layout_width="250dp"-->
+    <!--        android:layout_height="100dp"-->
+    <!--        android:layout_gravity="center_horizontal"-->
+    <!--        android:layout_margin="8dp"-->
+
+    <!--        android:layout_marginHorizontal="1dp"-->
+    <!--        android:layout_marginVertical="3dp"-->
+    <!--        android:background="@color/black"-->
+
+    <!--        android:gravity="start"-->
+    <!--        android:padding="8dp"-->
+    <!--        android:paddingHorizontal="8dp"-->
+
+
+    <!--        android:paddingVertical="8dp"-->
+    <!--        android:text="Demo Frame Layout"-->
+
+    <!--        android:textColor="@color/white"-->
+    <!--        android:textSize="15sp" />-->
+
+    <!--    <androidx.appcompat.widget.LinearLayoutCompat-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        android:orientation="horizontal">-->
+
+    <!--        <androidx.appcompat.widget.LinearLayoutCompat-->
+    <!--            android:layout_width="wrap_content"-->
+    <!--            android:layout_height="wrap_content"-->
+    <!--            android:orientation="vertical">-->
+
+    <!--            <TextView-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:text="Thu 2" />-->
+
+    <!--            <TextView-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:text="Van" />-->
+
+    <!--            <TextView-->
+    <!--                android:layout_width="match_parent"-->
+    <!--                android:layout_height="wrap_content"-->
+    <!--                android:text="Toan" />-->
+
+
+    <!--        </androidx.appcompat.widget.LinearLayoutCompat>-->
+
+    <!--    </androidx.appcompat.widget.LinearLayoutCompat>-->
+
+    <!--  ConstraintLayout =  RelativeLayout + FrameLayout -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="600dp"
+        android:background="@color/white">
+
+        <TextView
+            android:id="@+id/tv1"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:layout_marginTop="140dp"
+            android:background="@color/purple_500"
+            android:text="TextView 1"
+            app:layout_constraintStart_toStartOf="@+id/guideline2"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60dp"
+            android:background="@color/purple_200"
+            android:text="TextView 3"
+            app:layout_constraintBottom_toBottomOf="@id/tv1"
+            app:layout_constraintLeft_toRightOf="@id/tv1"
+            app:layout_constraintRight_toRightOf="@id/tv1"
+            app:layout_constraintTop_toTopOf="@id/tv1"
+            app:layout_constraintVertical_bias="0.407" />
+
+        <TextView
+            android:id="@+id/tv4"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:layout_marginTop="304dp"
+            android:background="@color/purple_500"
+            android:text="TextView 1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="60dp"
+            android:background="@color/purple_200"
+            android:text="TextView 3"
+            app:layout_constraintBottom_toBottomOf="@id/tv4"
+            app:layout_constraintHorizontal_bias="0.728"
+            app:layout_constraintLeft_toRightOf="@id/tv4"
+            app:layout_constraintRight_toRightOf="@id/tv4"
+            app:layout_constraintTop_toTopOf="@id/tv4"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="219dp"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <androidx.constraintlayout.widget.Group
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="tv4,tv5, tv3" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>
