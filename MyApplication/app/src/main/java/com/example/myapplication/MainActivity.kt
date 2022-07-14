@@ -25,6 +25,7 @@ class MainActivity : AppCompatActivity() {
                 textview1.append(", ")
             }
         }
+//        textview2.text = averageList(1).toString()
         textview2.text = averageList(*array).toString()
 
         // Exercise 2
@@ -74,10 +75,12 @@ class MainActivity : AppCompatActivity() {
 fun averageList(vararg listNumber: Int): Double
 {
     var total = 0.0
+    listNumber.forEach {  }
     for (number in listNumber)
     {
         total += number
     }
+//    listNumber.average()
     return total / listNumber.size
 }
 
@@ -87,6 +90,7 @@ fun getFirstChar(vararg listStr: String): String
     for (Element in listStr)
     {
         listFirstCharacter += Element[0].toString()
+//        listFirstCharacter += Element.first()
     }
     return listFirstCharacter
 }
