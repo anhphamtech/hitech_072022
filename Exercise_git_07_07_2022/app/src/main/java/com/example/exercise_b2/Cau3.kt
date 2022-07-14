@@ -10,8 +10,9 @@ class Cau3 {
     }
 
     fun evenIndexValue() {
+        if(!this::list.isInitialized)
         list?.let { item ->
-            for (i in 0..item.size - 1) {
+            for (i in 0 until item.size) {
                 if (i % 2 == 0)
                     Log.d("Cau3", "gia tri tai phan tu thu $i: ${item[i]}")
             }
