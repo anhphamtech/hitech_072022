@@ -9,5 +9,11 @@ fun EditText?.getStringOther(): String {
 }
 
 fun Editable?.getToString(): String {
-    return this?.toString() ?:""
+    return this?.toString() ?: ""
+}
+
+fun EditText.changeSelected() {
+    setOnFocusChangeListener { _, b ->
+        isSelected = b
+    }
 }
