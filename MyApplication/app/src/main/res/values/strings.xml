@@ -9,7 +9,13 @@
     <string name="sign_up_to_continues">Sign up to continues</string>
     <string name="name">Name</string>
     <string name="sign_up">Sign up</string>
-    <string name="or">———— OR ————</string>
+    <string name="or">OR</string>
     <string name="already_have_an_account">Already have an account?</string>
     <string name="sign_in">Sign in</string>
+    <!-- %s : String-->
+    <!-- %d : Int, Double-->
+    <!-- %f : Float-->
+    <string name="continue_format">Sign %s to continue</string>
+    <string name="_in">in</string>
+    <string name="_up">up</string>
 </resources>

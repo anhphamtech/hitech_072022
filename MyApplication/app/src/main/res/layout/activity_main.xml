@@ -7,36 +7,34 @@
     android:background="@color/white"
     tools:context=".MainActivity">
 
-
     <include
         android:id="@+id/layout_SignIn_Facebook"
         layout="@layout/layout_custom_button"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="60dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@id/Btn_Login"
-        app:layout_constraintTop_toBottomOf="@id/Tv_Appendix"
         app:layout_constraintVertical_bias="0.168" />
 
     <include
         android:id="@+id/layout_SignIn_Google"
         layout="@layout/layout_custom_button"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-
-
+        android:layout_marginStart="8dp"
         app:layout_constraintBottom_toBottomOf="@id/layout_SignIn_Facebook"
         app:layout_constraintEnd_toEndOf="@id/Btn_Login"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@id/layout_SignIn_Facebook"
-        app:layout_constraintTop_toTopOf="@id/layout_SignIn_Facebook"/>
+        app:layout_constraintStart_toStartOf="@+id/guideline2"
+        app:layout_constraintTop_toTopOf="@id/layout_SignIn_Facebook" />
 
     <EditText
         android:id="@+id/eText_Name"
         android:layout_width="370dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
         android:autofillHints=""
         android:background="@drawable/custom_layout_login"
         android:drawableStart="@drawable/ic_baseline_person_24"
@@ -44,15 +42,17 @@
         android:hint="@string/name"
         android:inputType="text"
         android:textSize="20sp"
-
+        app:layout_constraintBottom_toTopOf="@+id/eText_Email"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/Tv_Title2" />
+        app:layout_constraintTop_toBottomOf="@+id/Tv_Title2" />
 
     <EditText
         android:id="@+id/eText_Email"
         android:layout_width="370dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:autofillHints=""
         android:background="@drawable/custom_layout_login"
         android:drawableStart="@drawable/ic_baseline_email_24"
@@ -60,11 +60,11 @@
         android:hint="@string/email"
         android:inputType="textEmailAddress"
         android:textSize="20sp"
-        android:layout_marginTop="8dp"
-
+        app:layout_constraintBottom_toTopOf="@+id/eText_Pass"
         app:layout_constraintEnd_toEndOf="@id/eText_Name"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@id/eText_Name"
-        app:layout_constraintTop_toBottomOf="@id/eText_Name" />
+        app:layout_constraintTop_toBottomOf="@+id/eText_Name" />
 
     <EditText
         android:id="@+id/eText_Pass"
@@ -76,26 +76,26 @@
         android:drawableStart="@drawable/ic_baseline_lock_24"
         android:drawablePadding="10dp"
         android:hint="@string/password"
-        android:inputType="textEmailAddress"
-
+        android:inputType="textPassword"
         android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/Btn_Login"
         app:layout_constraintEnd_toEndOf="@id/eText_Email"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="@id/eText_Email"
-        app:layout_constraintTop_toBottomOf="@id/eText_Email" />
+        app:layout_constraintTop_toBottomOf="@+id/eText_Email" />
 
     <TextView
         android:id="@+id/Tv_Title1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
         android:text="@string/welcome_back"
         android:textColor="@color/black"
-        android:textStyle="bold"
         android:textSize="35sp"
-        android:layout_marginTop="50dp"
-
-        app:layout_constraintTop_toTopOf="parent"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/Tv_Title2"
@@ -104,7 +104,6 @@
         android:text="@string/sign_up_to_continues"
         android:textSize="25sp"
         android:textStyle="bold"
-
         app:layout_constraintBottom_toTopOf="@id/eText_Email"
         app:layout_constraintEnd_toEndOf="@id/Tv_Title1"
         app:layout_constraintHorizontal_bias="0.515"
@@ -112,33 +111,51 @@
         app:layout_constraintTop_toBottomOf="@id/Tv_Title1"
         app:layout_constraintVertical_bias="0.0" />
 
+    <View
+        android:layout_width="48dp"
+        android:layout_height="2dp"
+        android:layout_marginEnd="10dp"
+        android:background="@color/Gray"
+        app:layout_constraintBottom_toBottomOf="@id/Tv_Appendix"
+        app:layout_constraintEnd_toStartOf="@+id/Tv_Appendix"
+        app:layout_constraintTop_toTopOf="@id/Tv_Appendix" />
+
     <TextView
         android:id="@+id/Tv_Appendix"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:fontFamily="monospace"
         android:text="@string/or"
         android:textSize="20sp"
-        android:fontFamily="monospace"
-
         android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@id/layout_SignIn_Facebook"
         app:layout_constraintEnd_toEndOf="@id/Btn_Login"
-        app:layout_constraintStart_toStartOf="@id/Btn_Login"
-        app:layout_constraintTop_toBottomOf="@id/Btn_Login" />
+        app:layout_constraintStart_toStartOf="@id/Btn_Login" />
+
+    <View
+        android:layout_width="48dp"
+        android:layout_height="2dp"
+        android:layout_marginStart="10dp"
+        android:background="@color/Gray"
+        app:layout_constraintBottom_toBottomOf="@id/Tv_Appendix"
+        app:layout_constraintStart_toEndOf="@+id/Tv_Appendix"
+        app:layout_constraintTop_toTopOf="@id/Tv_Appendix" />
 
     <Button
         android:id="@+id/Btn_Login"
         android:layout_width="370dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/bg_btn_login"
         android:text="@string/sign_up"
         android:textColor="@color/white"
         android:textSize="15sp"
-        android:layout_marginTop="30dp"
-        android:background="@drawable/bg_btn_login"
-
-        app:layout_constraintTop_toBottomOf="@id/eText_Pass"
-        app:layout_constraintStart_toStartOf="@id/eText_Pass"
-        app:layout_constraintEnd_toEndOf="@id/eText_Pass"/>
+        app:layout_constraintBottom_toTopOf="@id/Tv_Appendix"
+        app:layout_constraintEnd_toEndOf="@id/eText_Pass"
+        app:layout_constraintStart_toStartOf="@id/eText_Pass" />
 
     <TextView
         android:id="@+id/Tv_TitleBot"
@@ -150,9 +167,7 @@
         android:textSize="15sp"
 
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@id/layout_SignIn_Facebook"
-        app:layout_constraintTop_toBottomOf="@id/layout_SignIn_Facebook"
-        app:layout_constraintVertical_bias="0.898" />
+        app:layout_constraintStart_toStartOf="@id/layout_SignIn_Facebook" />
 
     <TextView
         android:id="@+id/Tv_Login"
@@ -160,10 +175,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
         android:layout_marginBottom="10dp"
+        android:fontFamily="monospace"
         android:text="@string/sign_in"
         android:textSize="15sp"
         android:textStyle="bold"
-        android:fontFamily="monospace"
 
         app:layout_constraintBottom_toBottomOf="@id/Tv_TitleBot"
         app:layout_constraintEnd_toEndOf="parent"
@@ -171,5 +186,12 @@
         app:layout_constraintStart_toEndOf="@id/Tv_TitleBot"
         app:layout_constraintTop_toTopOf="@id/Tv_TitleBot"
         app:layout_constraintVertical_bias="0.0" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
