@@ -1,5 +1,6 @@
 package com.example.myapplication
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -29,15 +30,23 @@ class MainActivity : AppCompatActivity() {
 
         val eTextName = findViewById<EditText>(R.id.eText_Name)
 
+        val btnLogin = findViewById<Button>(R.id.Btn_Login)
+        val tvTitle = findViewById<TextView>(R.id.Tv_Title2)
         val tvLogin = findViewById<TextView>(R.id.Tv_Login)
         tvLogin.setOnClickListener {
             if (eTextName.visibility == View.VISIBLE)
             {
                 eTextName.visibility = View.INVISIBLE
+                tvLogin.text = "Sign up"
+                tvTitle.text = "Sign in to continue"
+                btnLogin.text = "Sign in"
             }
             else
             {
                 eTextName.visibility = View.VISIBLE
+                tvLogin.text = "Sign in"
+                tvTitle.text = "Sign up to continue"
+                btnLogin.text = "Sign up"
             }
         }
     }
