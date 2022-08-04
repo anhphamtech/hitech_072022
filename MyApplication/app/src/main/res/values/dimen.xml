@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="btn_login">56dp</dimen>
+    <dimen name="height_btn_default">56dp</dimen>
+    <dimen name="margin_default">16dp</dimen>
+    <dimen name="margin_top_title">50dp</dimen>
+    <dimen name="size_text_default">25sp</dimen>
+    <dimen name="size_text_small">17sp</dimen>
+    <dimen name="size_text_large">35sp</dimen>
+</resources>
