@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bg_top"
+    tools:context=".Calculator.CalculatorActivity">
+
+    <TextView
+        android:id="@+id/tvInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="end|center_vertical"
+        android:padding="16dp"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toTopOf="@id/tvOutput"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/tvOutput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/padding_bottom"
+        android:layout_marginBottom="16dp"
+        android:gravity="end|center_vertical"
+        android:padding="16dp"
+        android:text="0"
+        android:textColor="@color/white"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toTopOf="@id/guidelineVertical"
+        app:layout_constraintEnd_toEndOf="@id/tvInput"
+        app:layout_constraintStart_toStartOf="@id/tvInput"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <View
+        android:id="@+id/rootBottom"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/bg_bottom"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guidelineVertical" />
+
+    <!--    Row 1-->
+
+    <include
+        android:id="@+id/tvNumber_7"
+        layout="@layout/item_button_num_include"
+        android:layout_width="@dimen/btn_height"
+        android:layout_height="@dimen/btn_height"
+        android:layout_marginStart="@dimen/padding_bottom"
+        android:layout_marginTop="@dimen/padding_bottom"
+        android:layout_marginEnd="@dimen/space_number"
+        app:layout_constraintEnd_toStartOf="@+id/tvNumber_8"
+        app:layout_constraintTop_toTopOf="@id/rootBottom" />
+
+    <include
+        android:id="@+id/tvNumber_8"
+        layout="@layout/item_button_num_include"
+        android:layout_width="@dimen/btn_height"
+        android:layout_height="@dimen/btn_height"
+        android:layout_marginEnd="@dimen/half_space_number"
+        app:layout_constraintBottom_toBottomOf="@id/tvNumber_7"
+        app:layout_constraintEnd_toStartOf="@id/guidelineHorizontal"
+        app:layout_constraintTop_toTopOf="@id/tvNumber_7" />
+
+    <include
+        android:id="@+id/tvNumber_9"
+        layout="@layout/item_button_num_include"
+        android:layout_width="@dimen/btn_height"
+        android:layout_height="@dimen/btn_height"
+        android:layout_marginStart="@dimen/half_space_number"
+        app:layout_constraintBottom_toBottomOf="@id/tvNumber_7"
+        app:layout_constraintStart_toEndOf="@id/guidelineHorizontal"
+        app:layout_constraintTop_toTopOf="@id/tvNumber_7"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <include
+        android:id="@+id/tvNumberDiv"
+        layout="@layout/item_button_num_include"
+        android:layout_width="@dimen/btn_height"
+        android:layout_height="@dimen/btn_height"
+        android:layout_marginStart="@dimen/space_number"
+        app:layout_constraintBottom_toBottomOf="@id/tvNumber_7"
+        app:layout_constraintStart_toEndOf="@+id/tvNumber_9"
+        app:layout_constraintTop_toTopOf="@id/tvNumber_7" />
+
+    <!--    Row 2-->
+
+    <include
+        android:id="@+id/tvNumber_4"
+        layout="@layout/item_button_num_include"
+        android:layout_width="@dimen/btn_height"
+        android:layout_height="@dimen/btn_height"
+        android:layout_marginTop="@dimen/space_number"
+        android:layout_marginEnd="@dimen/space_number"
+        app:layout_constraintEnd_toStartOf="@id/tvNumber_5"
+        app:layout_constraintTop_toBottomOf="@id/tvNumber_7" />
+
+
+    <include
+        android:id="@+id/tvNumber_5"
+        layout="@layout/item_button_num_include"
+        android:layout_width="@dimen/btn_height"
+        android:layout_height="@dimen/btn_height"
+        android:layout_marginEnd="@dimen/half_space_number"
+        app:layout_constraintBottom_toBottomOf="@id/tvNumber_4"
+        app:layout_constraintEnd_toEndOf="@id/guidelineHorizontal"
+        app:layout_constraintTop_toTopOf="@id/tvNumber_4" />
+
+    <include
+        android:id="@+id/tvNumber_6"
+        layout="@layout/item_button_num_include"
+        android:layout_width="@dimen/btn_height"
+        android:layout_height="@dimen/btn_height"
+        android:layout_marginStart="@dimen/half_space_number"
+        app:layout_constraintBottom_toBottomOf="@id/tvNumber_4"
+        app:layout_constraintStart_toEndOf="@id/guidelineHorizontal"
+        app:layout_constraintTop_toTopOf="@id/tvNumber_4" />
+
+    <include
+        android:id="@+id/tvNumberMul"
+        layout="@layout/item_button_num_include"
+        android:layout_width="@dimen/btn_height"
+        android:layout_height="@dimen/btn_height"
+        android:layout_marginStart="@dimen/space_number"
+        app:layout_constraintBottom_toBottomOf="@id/tvNumber_4"
+        app:layout_constraintStart_toEndOf="@id/tvNumber_6"
+        app:layout_constraintTop_toTopOf="@id/tvNumber_4" />
+
+    <!--    Row 3-->
+
+    <include
+        android:id="@+id/tvNumber_1"
+        layout="@layout/item_button_num_include"
+        android:layout_width="@dimen/btn_height"
+        android:layout_height="@dimen/btn_height"
+        android:layout_marginTop="@dimen/space_number"
+        app:layout_constraintStart_toStartOf="@id/tvNumber_4"
+        app:layout_constraintTop_toBottomOf="@id/tvNumber_4" />
+
+    <include
+        android:id="@+id/tvNumber_2"
+        layout="@layout/item_button_num_include"
+        android:layout_width="@dimen/btn_height"
+        android:layout_height="@dimen/btn_height"
+        android:layout_marginEnd="@dimen/half_space_number"
+        app:layout_constraintBottom_toBottomOf="@id/tvNumber_1"
+        app:layout_constraintEnd_toStartOf="@id/guidelineHorizontal"
+        app:layout_constraintTop_toTopOf="@id/tvNumber_1" />
+
+    <include
+        android:id="@+id/tvNumber_3"
+        layout="@layout/item_button_num_include"
+        android:layout_width="@dimen/btn_height"
+        android:layout_height="@dimen/btn_height"
+        android:layout_marginStart="@dimen/half_space_number"
+        app:layout_constraintBottom_toBottomOf="@id/tvNumber_1"
+        app:layout_constraintStart_toEndOf="@id/guidelineHorizontal"
+        app:layout_constraintTop_toTopOf="@id/tvNumber_1" />
+
+    <include
+        android:id="@+id/tvNumberSub"
+        layout="@layout/item_button_num_include"
+        android:layout_width="@dimen/btn_height"
+        android:layout_height="@dimen/btn_height"
+        android:layout_marginStart="@dimen/space_number"
+        app:layout_constraintBottom_toBottomOf="@id/tvNumber_1"
+        app:layout_constraintStart_toEndOf="@id/tvNumber_3"
+        app:layout_constraintTop_toTopOf="@id/tvNumber_1" />
+
+    <!--    Row 4-->
+
+    <include
+        android:id="@+id/tvNumberAc"
+        layout="@layout/item_button_num_include"
+        android:layout_width="@dimen/btn_height"
+        android:layout_height="@dimen/btn_height"
+        android:layout_marginTop="@dimen/space_number"
+        app:layout_constraintStart_toStartOf="@id/tvNumber_1"
+        app:layout_constraintTop_toBottomOf="@id/tvNumber_1" />
+
+    <include
+        android:id="@+id/tvNumber_0"
+        layout="@layout/item_button_num_include"
+        android:layout_width="@dimen/btn_height"
+        android:layout_height="@dimen/btn_height"
+        app:layout_constraintBottom_toBottomOf="@id/tvNumberAc"
+        app:layout_constraintEnd_toEndOf="@id/tvNumber_2"
+        app:layout_constraintStart_toStartOf="@id/tvNumber_2"
+        app:layout_constraintTop_toTopOf="@id/tvNumberAc" />
+
+    <include
+        android:id="@+id/tvNumberDot"
+        layout="@layout/item_button_num_include"
+        android:layout_width="@dimen/btn_height"
+        android:layout_height="@dimen/btn_height"
+        app:layout_constraintBottom_toBottomOf="@id/tvNumberAc"
+        app:layout_constraintEnd_toEndOf="@id/tvNumber_3"
+        app:layout_constraintStart_toStartOf="@id/tvNumber_3"
+        app:layout_constraintTop_toTopOf="@id/tvNumberAc" />
+
+    <include
+        android:id="@+id/tvNumberPlus"
+        layout="@layout/item_button_num_include"
+        android:layout_width="@dimen/btn_height"
+        android:layout_height="@dimen/btn_height"
+        app:layout_constraintBottom_toBottomOf="@id/tvNumberAc"
+        app:layout_constraintEnd_toEndOf="@id/tvNumberSub"
+        app:layout_constraintStart_toStartOf="@id/tvNumberSub"
+        app:layout_constraintTop_toTopOf="@id/tvNumberAc" />
+
+    <!--Row 5-->
+    <include
+        android:id="@+id/tvNumberSubmit"
+        layout="@layout/item_button_num_include"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/btn_height"
+        android:layout_marginTop="@dimen/space_number"
+        app:layout_constraintEnd_toEndOf="@id/tvNumberPlus"
+        app:layout_constraintStart_toStartOf="@id/tvNumber_7"
+        app:layout_constraintTop_toBottomOf="@id/tvNumberPlus" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineVertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="20dp"
+        app:layout_constraintGuide_percent="0.3" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guidelineHorizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TextView
+    android:id="@+id/tvNumber"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="@dimen/btn_height"
-    android:layout_height="@dimen/btn_width"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     android:background="@drawable/selector_button"
-    android:textSize="15dp"
+    android:textSize="15sp"
+    android:gravity="center"
     android:textColor="@color/white">
 
 </TextView>

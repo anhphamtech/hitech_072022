@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="btn_height">60dp</dimen>
+    <dimen name="btn_height">50dp</dimen>
     <dimen name="btn_width">60dp</dimen>
     <dimen name="size_num">30dp</dimen>
+    <dimen name="padding_bottom">36dp</dimen>
+    <dimen name="space_number">24dp</dimen>
+    <dimen name="half_space_number">12dp</dimen>
 </resources>

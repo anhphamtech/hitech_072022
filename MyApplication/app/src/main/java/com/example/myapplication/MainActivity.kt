@@ -7,7 +7,7 @@ import android.util.Log
 class MainActivity : AppCompatActivity() {
 
     //Ca 2 deu duoc
-    var i = 0
+    var i123 = 0
     var i1: Int = 0
     var i2: Int? = null
 //    lateinit var i3 : Int
@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         //hot ket : Shift + F6 -> change all project
         user.fullName
         user.age
-        sum(i, i1)
+        sum(i123, i1)
         sum(i1, i2)
         i2?.let {
             sum(i1, it)
