@@ -52,7 +52,7 @@ class MainActivity3 : AppCompatActivity() {
     }
 
     private fun iniListener() {
-//        getSum?.isEnabled = false
+        getSum?.isEnabled = false
         getSum?.setOnClickListener(object : View.OnClickListener {
             override fun onClick(p0: View?) {
 //                val number1 = num1.fromEdittextToDouble()

@@ -184,7 +184,8 @@
             android:layout_marginTop="50dp"
             android:text="SUM"
             android:textAlignment="center"
-            android:textSize="30dp" />
+            android:textSize="30dp"
+            />
 
 
     </androidx.appcompat.widget.LinearLayoutCompat>
