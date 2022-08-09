@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_top"
-    tools:context=".Calculator.CalculatorActivity">
+    tools:context=".calculator.CalculatorActivity">
 
     <TextView
         android:id="@+id/tvInput"
@@ -28,6 +28,7 @@
         android:gravity="end|center_vertical"
         android:padding="16dp"
         android:text="0"
+        android:maxLines="1"
         android:textColor="@color/white"
         android:textSize="40sp"
         app:layout_constraintBottom_toTopOf="@id/guidelineVertical"

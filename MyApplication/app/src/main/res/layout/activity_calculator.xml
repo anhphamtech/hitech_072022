@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/bg_top"
     android:orientation="vertical"
-    tools:context=".Calculator.CalculatorActivity">
+    tools:context=".calculator.CalculatorActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

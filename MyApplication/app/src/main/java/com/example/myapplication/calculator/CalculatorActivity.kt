@@ -1,4 +1,4 @@
-package com.example.myapplication.Calculator
+package com.example.myapplication.calculator
 
 import android.os.Bundle
 import android.widget.TextView
@@ -9,19 +9,16 @@ import com.example.myapplication.R
 class CalculatorActivity : AppCompatActivity() {
 
     companion object {
-        const val NO_ACTION = 0
-        const val SUBMIT_PLUS = 1
-        const val SUBMIT_SUB = 2
-        const val SUBMIT_MUL = 3
-        const val SUBMIT_DIV = 4
+        private const val NO_ACTION = ""
+        private const val NOT_SUBMIT = false
+        private const val DONE_SUBMIT = true
     }
 
     private val listButton = arrayListOf<TextView>()
     private lateinit var tvInput: TextView
     private lateinit var tvOutput: TextView
-    private var submitAction = NO_ACTION
-    private var numberOne = 0.0
-    private var numberTwo = 0.0
+    private var stringAction = NO_ACTION
+    private var actionSubmit = NOT_SUBMIT
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -101,53 +98,75 @@ class CalculatorActivity : AppCompatActivity() {
 
     private fun onClickButton(view: TextView) {
         val input = view.text.toString()
+
         when (input.toIntOrNull()) {
+            //input = + - x : AC = .
             null -> {
                 when (input) {
                     getString(R.string._aC) -> handleClickAc()
                     getString(R.string._submit) -> handleSubmit()
+                    getString(R.string._dot) -> handleClickDot()
                     else -> handleGetAction(input)
                 }
             }
-            else -> {
-                when (submitAction == NO_ACTION) {
-                    true -> numberOne = input.toDouble()
-                    else -> numberTwo =  input.toDouble()
-                }
-//                when (submitAction == NO_ACTION) {
-//                    true -> numberOne = (numberOne.toString() + input).toDouble()
-//                    else -> numberTwo = getString(R.string.format_input_number,numberTwo,input).toDouble()
-//                }
-                tvInput.text = getString(R.string.format_input, tvInput.text, input)
-            }
+            //input 0->9
+            else -> addNumberToInput(tvInput.text.toString(), input)
         }
+    }
+
+    private fun addNumberToInput(data: String, input: String) {
+        tvInput.text = getString(R.string.format_input, data, input)
     }
 
     private fun handleClickAc() {
         tvInput.text = ""
         tvOutput.text = "0"
-        submitAction = NO_ACTION
+        stringAction = NO_ACTION
+        actionSubmit = NOT_SUBMIT
+    }
+
+    private fun handleClickDot(action: String = ".") {
+        tvInput.text = getString(R.string.format_input, tvInput.text, action)
     }
 
     private fun handleSubmit() {
-        tvOutput.text = "${
-            when (submitAction) {
-                SUBMIT_PLUS -> numberOne + numberTwo
-                SUBMIT_SUB -> numberOne - numberTwo
-                SUBMIT_DIV -> numberOne / numberTwo
+        val resInput = tvInput.text
+        if (resInput.last().toString() != ".") {
+            val listResult = resInput.split(stringAction)
+            val numberOne = listResult[0].toDouble()
+            val numberTwo = listResult[1].toDouble()
+            tvOutput.text = when (stringAction) {
+                getString(R.string._plus) -> numberOne + numberTwo
+                getString(R.string._sub) -> numberOne - numberTwo
+                getString(R.string._div) -> numberOne / numberTwo
                 else -> numberOne * numberTwo
-            }
-        }".toBigDecimal().toString()
+            }.toString()
+            actionSubmit = DONE_SUBMIT
+        }
     }
 
     private fun handleGetAction(action: String) {
-        tvInput.text = getString(R.string.format_input, tvInput.text, action)
-        submitAction =
-            when (action) {
-                getString(R.string._plus) -> SUBMIT_PLUS
-                getString(R.string._sub) -> SUBMIT_SUB
-                getString(R.string._div) -> SUBMIT_DIV
-                else -> SUBMIT_MUL
+//        val result = tvInput.text
+        tvInput.text.let {
+            when (actionSubmit) {
+                NOT_SUBMIT -> {
+                    if (it.last().toString() != "." && stringAction == NO_ACTION) {
+                        stringAction = action
+                        tvInput.text = getString(R.string.format_input, tvInput.text, action)
+                    }
+                }
+                //DONE_SUBMIT
+                else -> {
+                    val resultZero = tvOutput.text.toString()
+                    val number = when (resultZero.last().toString() == "0") {
+                        true -> resultZero.split(".")[0]
+                        else -> resultZero
+                    }
+                    stringAction = action
+                    addNumberToInput(number, action)
+                    actionSubmit = NOT_SUBMIT
+                }
             }
+        }
     }
 }
