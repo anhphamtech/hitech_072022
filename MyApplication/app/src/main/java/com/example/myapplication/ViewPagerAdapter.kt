@@ -13,6 +13,7 @@ class ViewPagerAdapter(fragmentManager: FragmentManager) : FragmentPagerAdapter(
     override fun getItem(position: Int) = when (position) {
         0 -> NameFragment()
         1 -> AgeFragment()
+        //2
         else -> InfoFragment()
     }
 

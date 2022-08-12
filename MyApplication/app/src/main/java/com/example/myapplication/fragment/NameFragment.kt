@@ -15,4 +15,9 @@ class NameFragment : Fragment() {
     ): View? {
         return inflater.inflate(R.layout.fragment_name, container, false)
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        parentFragmentManager
+    }
 }
