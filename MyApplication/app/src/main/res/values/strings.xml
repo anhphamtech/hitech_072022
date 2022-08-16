@@ -28,6 +28,6 @@
     <string name="_submit">=</string>
     <string name="format_input">%s%s</string>
     <string name="format_input_number">%f%s</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="format_title_drawer">Title %d</string>
 </resources>
