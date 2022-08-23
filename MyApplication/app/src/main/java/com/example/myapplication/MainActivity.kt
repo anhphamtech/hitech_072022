@@ -2,18 +2,20 @@ package com.example.myapplication
 
 import android.os.Bundle
 import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageView
+import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager.widget.ViewPager
 import com.example.myapplication.adapter.ItemDrawerAdapter
-import com.example.myapplication.fragment.NameFragment
+import com.example.myapplication.fragment.ContactFragment
 import com.example.myapplication.model.ItemDrawerModel
 import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -35,6 +37,7 @@ class MainActivity : AppCompatActivity() {
         Log.d("activityLife", "onCreate()")
         demoHashMap()
         initAdapterAndRecyclerView()
+//        moveContactFragment()
     }
 
     private fun initView() {
@@ -48,6 +51,9 @@ class MainActivity : AppCompatActivity() {
     private fun initListener() {
         tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab?) {
+                tab?.position?.let {
+                    viewPager.currentItem = it
+                }
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {
@@ -69,7 +75,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onPageSelected(position: Int) {
-
+                tabLayout.getTabAt(position)?.select()
             }
 
             override fun onPageScrollStateChanged(state: Int) {
@@ -77,17 +83,9 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        tabLayout.setupWithViewPager(viewPager)
-
-//        tabLayout.getTabAt(1)?.select()
-//        viewPager.currentItem = 1
-
-        //index : start = 0
-        //size/length: start = 1
-
         ivMenu.setOnClickListener {
-            updateStatusDrawer()
-//            moveNameFragment()
+//            updateStatusDrawer()
+            moveContactFragment()
         }
 //        finish()
     }
@@ -112,16 +110,6 @@ class MainActivity : AppCompatActivity() {
     * 2. Activity < Fragment
     * CPU, GPU, RAM
     * */
-
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        setContentView(R.layout.activity_main)
-//        initView()
-//        initViewPager()
-//        initListener()
-//        Log.d("activityLife", "1")
-//        //1
-//    }
 
     override fun onStart() {
         super.onStart()
@@ -159,8 +147,8 @@ class MainActivity : AppCompatActivity() {
         //5.1
     }
 
-    private fun moveNameFragment() {
-        val fragment = NameFragment()
+    private fun moveContactFragment() {
+        val fragment = ContactFragment()
         val tag = fragment::class.java.simpleName
         supportFragmentManager.beginTransaction().apply {
 //            replace(R.id.actMain_flMain, fragment,tag)
@@ -231,10 +219,9 @@ class MainActivity : AppCompatActivity() {
         draweAdaper.notifyItemChanged(index)
 
 
-
 //        draweAdaper.notifyDataSetChanged()
         draweAdaper.notifyItemChanged(index)
-        draweAdaper.notifyItemRangeChanged(index, 10,)
+        draweAdaper.notifyItemRangeChanged(index, 10)
         draweAdaper.notifyItemInserted(index)
         draweAdaper.notifyItemRemoved(index)
     }

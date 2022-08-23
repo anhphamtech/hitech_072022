@@ -11,8 +11,8 @@ class ViewPagerAdapter(fragmentManager: FragmentManager) : FragmentPagerAdapter(
     override fun getCount() = 3
 
     override fun getItem(position: Int) = when (position) {
-        0 -> NameFragment()
-        1 -> AgeFragment()
+        0 -> AgeFragment()
+        1 -> NameFragment()
         //2
         else -> InfoFragment()
     }
