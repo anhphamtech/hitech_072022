@@ -88,7 +88,8 @@
             android:id="@+id/tv1"
             android:layout_width="wrap_content"
             android:layout_height="100dp"
-            android:layout_marginTop="140dp"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="144dp"
             android:background="@color/purple_500"
             android:text="TextView 1"
             app:layout_constraintStart_toStartOf="@+id/guideline2"
@@ -98,14 +99,13 @@
             android:id="@+id/tv3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="60dp"
+            android:layout_marginLeft="48dp"
             android:background="@color/purple_200"
             android:text="TextView 3"
             app:layout_constraintBottom_toBottomOf="@id/tv1"
             app:layout_constraintLeft_toRightOf="@id/tv1"
-            app:layout_constraintRight_toRightOf="@id/tv1"
             app:layout_constraintTop_toTopOf="@id/tv1"
-            app:layout_constraintVertical_bias="0.407" />
+            app:layout_constraintVertical_bias="0.382" />
 
         <TextView
             android:id="@+id/tv4"
@@ -115,6 +115,7 @@
             android:background="@color/purple_500"
             android:text="TextView 1"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.359"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -143,7 +144,7 @@
         <androidx.constraintlayout.widget.Group
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="gone"
+            android:visibility="visible"
             app:constraint_referenced_ids="tv4,tv5, tv3" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

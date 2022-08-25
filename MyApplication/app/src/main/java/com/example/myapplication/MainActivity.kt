@@ -1,136 +1,228 @@
 package com.example.myapplication
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatImageView
+import androidx.core.content.ContextCompat
+import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import androidx.viewpager.widget.ViewPager
+import com.example.myapplication.adapter.ItemDrawerAdapter
+import com.example.myapplication.fragment.ContactFragment
+import com.example.myapplication.model.ItemDrawerModel
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
+
 
 class MainActivity : AppCompatActivity() {
 
-    //Ca 2 deu duoc
-    var i = 0
-    var i1: Int = 0
-    var i2: Int? = null
-//    lateinit var i3 : Int
+    private lateinit var tabLayout: TabLayout
+    private lateinit var viewPager: ViewPager
+    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var ivMenu: AppCompatImageView
+    private lateinit var rvcDrawer: RecyclerView
 
+    private lateinit var draweAdaper: ItemDrawerAdapter
+    private val listItem = arrayListOf<ItemDrawerModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.fragment_framelayout)
-        var user = User()
-        //hot ket : Shift + F6 -> change all project
-        user.fullName
-        user.age
-        sum(i, i1)
-        sum(i1, i2)
-        i2?.let {
-            sum(i1, it)
+        setContentView(R.layout.activity_main)
+        initView()
+        initViewPager()
+        initListener()
+        Log.d("activityLife", "onCreate()")
+        demoHashMap()
+        initAdapterAndRecyclerView()
+        moveContactFragment()
+    }
+
+    private fun initView() {
+        tabLayout = findViewById(R.id.actMain_tabLayout)
+        viewPager = findViewById(R.id.actMain_viewPager)
+        drawerLayout = findViewById(R.id.actMain_dl)
+        ivMenu = findViewById(R.id.actMain_ivMenu)
+        rvcDrawer = findViewById(R.id.actMain_rcvDrawer)
+    }
+
+    private fun initListener() {
+        tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+                tab?.position?.let {
+                    viewPager.currentItem = it
+                }
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+
+            }
+
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+
+            }
+        })
+
+        viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
+
+            }
+
+            override fun onPageSelected(position: Int) {
+                tabLayout.getTabAt(position)?.select()
+            }
+
+            override fun onPageScrollStateChanged(state: Int) {
+
+            }
+        })
+
+        ivMenu.setOnClickListener {
+            updateStatusDrawer()
+//            moveContactFragment()
         }
-//        if(i2 !=null){
-//            sum(i1, i2!!)
+//        finish()
+    }
+
+    private fun initViewPager() {
+        val adapterViewPager = ViewPagerAdapter(supportFragmentManager)
+        viewPager.adapter = adapterViewPager
+    }
+
+    private fun updateStatusDrawer() {
+        when (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            true -> drawerLayout.closeDrawer(GravityCompat.END)
+            else -> drawerLayout.openDrawer(GravityCompat.START)
+
+        }
+    }
+
+
+    //Activity & Fragment
+    /*
+    * 1. Activity > Fragment
+    * 2. Activity < Fragment
+    * CPU, GPU, RAM
+    * */
+
+    override fun onStart() {
+        super.onStart()
+        Log.d("activityLife", "2")
+        //2
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d("activityLife", "3")
+        //3
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d("activityLife", "5")
+        //5
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d("activityLife", "4")
+        //4
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d("activityLife", "6")
+        //6
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        Log.d("activityLife", "5.1")
+        //5.1
+    }
+
+    private fun moveContactFragment() {
+        val fragment = ContactFragment()
+        val tag = fragment::class.java.simpleName
+        supportFragmentManager.beginTransaction().apply {
+//            replace(R.id.actMain_flMain, fragment,tag)
+            add(R.id.actMain_flMain, fragment, tag)
+            //first in last out
+            addToBackStack(tag)
+            commit()
+            //Name
+            //Age
+            //Info
+        }
+    }
+
+    val map = hashMapOf<String, Int>()
+
+    private fun demoHashMap() {
+        val list = arrayListOf<Int>()
+
+        for (i in 0..9) {
+            map["$i"] = i
+            list.add(i)
+        }
+
+        //Phan tu thu 3
+        //index -> ?
+        //Thu tu -> ?
+
+        //phan tu thu 5
+//        Toast.makeText(this, map["4"].toString(), Toast.LENGTH_SHORT).show()
+    }
+
+    private fun initAdapterAndRecyclerView() {
+        for (i in 0..19) {
+            val icon = when (i) {
+                0, 5 -> R.drawable.ic_beer
+                1, 6 -> R.drawable.ic_champagne
+                2, 7 -> R.drawable.ic_cinema
+                3, 8 -> R.drawable.ic_confetti
+                else -> R.drawable.ic_coffee
+            }
+            listItem.add(
+                ItemDrawerModel(
+                    title = getString(R.string.format_title_drawer, i + 1),
+                    icon = icon
+                )
+            )
+        }
+        draweAdaper = ItemDrawerAdapter(listItem) { handleClickItemDrawer(it) }
+        rvcDrawer.adapter = draweAdaper
+        rvcDrawer.layoutManager = LinearLayoutManager(this)
+        rvcDrawer.setHasFixedSize(true)
+    }
+
+    private fun handleClickItemDrawer(index: Int) {
+        val temp = listItem.firstOrNull { it.statusSelected }
+        temp?.let {
+            temp.statusSelected = false
+            val indexSelected = listItem.indexOf(temp)
+            if (indexSelected != -1)
+                draweAdaper.notifyItemChanged(indexSelected)
+        }
+//        if (temp != null) {
+//
 //        }
+//        val itemSelected = listItem[index]
+//        itemSelected.statusSelected = true
+        listItem[index].statusSelected = true
+        draweAdaper.notifyItemChanged(index)
 
-        printName()
-        printName("Phuong")
-        printName("Vu")
 
-        demoFor()
-    }
-
-    fun sum(a: Int, b: Int?): Int {
-        //1
-        return when (b != null) {
-            true -> a + b
-            else -> a
-        }
-
-        //2
-//        return if (b != null)
-//            a + b
-//        else a
-    }
-
-//    fun sumShort(a: Int, b: Int) = a + b
-
-    private fun printName(name: String = "A") {
-
-        val firstChar = name.substring(0, 1)
-//        Log.d("hitechUni", firstChar.uppercase())
-
-        //1
-        //Search the same word in class -> Alt + J
-        var fullName = ""
-        when (firstChar) {
-            "P" -> fullName = "Phuong"
-            "V" -> fullName = "Vu"
-            else -> fullName = "Anh"
-        }
-
-        //2
-        val name2 = when (firstChar) {
-            "P" -> "Phuong"
-            "V" -> "Vu"
-            else -> "Anh"
-        }
-
-        Log.d("hitechUni", "$fullName - ${name2}2")
-    }
-
-    private fun demoFor() {
-        //1
-        var list1 = ArrayList<Int>()
-        var list2 = ArrayList<String>()
-        var list3 = ArrayList<Double>()
-        var list4 = ArrayList<User>()
-        //2
-        var list = arrayListOf<Int>()
-
-//        (i =11;i<20;i++)
-
-        for (i in 0..10) {
-            list.add(i)
-        }
-
-        for (i in 11 until 20) {
-            list.add(i)
-        }
-
-        list.remove(8)
-        list.removeAt(6)
-
-        //List
-        /* Index
-        * Start 0
-        * */
-
-        /* Size
-        * Start 1
-        * */
-        list.size
-
-        //No need index
-        list.forEach { item ->
-            Log.d("demoFor", "demoFor : $item")
-        }
-
-        list4.forEach {
-            it.fullName
-            it.age
-        }
-
-        //Need index for logic
-        for (index in 0 until list.size) {
-            Log.d("demoFor", "demoFor index : ${list[index]}")
-        }
-
-    }
-
-    //1
-    fun noVoid(): Unit {
-
-    }
-
-    //2
-    fun noVoid1(){
-
+//        draweAdaper.notifyDataSetChanged()
+        draweAdaper.notifyItemChanged(index)
+        draweAdaper.notifyItemRangeChanged(index, 10)
+        draweAdaper.notifyItemInserted(index)
+        draweAdaper.notifyItemRemoved(index)
     }
 }
