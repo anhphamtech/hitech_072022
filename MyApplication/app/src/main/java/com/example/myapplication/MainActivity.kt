@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
         Log.d("activityLife", "onCreate()")
         demoHashMap()
         initAdapterAndRecyclerView()
-//        moveContactFragment()
+        moveContactFragment()
     }
 
     private fun initView() {
@@ -84,8 +84,8 @@ class MainActivity : AppCompatActivity() {
         })
 
         ivMenu.setOnClickListener {
-//            updateStatusDrawer()
-            moveContactFragment()
+            updateStatusDrawer()
+//            moveContactFragment()
         }
 //        finish()
     }

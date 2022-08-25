@@ -9,12 +9,12 @@
 
     <TextView
         android:id="@+id/itemContact_tvHeader"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:background="@drawable/bg_contact"
         android:gravity="center"
         android:textColor="@color/white"
-        android:textSize="30sp"
+        android:textSize="20sp"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,8 +23,8 @@
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/itemContact_ivHeader"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
         android:background="@drawable/bg_contact"
         android:gravity="center"
         android:textColor="@color/white"
@@ -56,5 +56,15 @@
         app:layout_constraintStart_toStartOf="@id/itemContact_tvName"
         app:layout_constraintTop_toBottomOf="@id/itemContact_tvName"
         tools:text="0909090909" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/itemContact_ivLike"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/selector_heart"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

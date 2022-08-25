@@ -2,12 +2,11 @@ package com.example.myapplication.fragment
 
 import android.Manifest
 import android.annotation.SuppressLint
+import android.content.Context
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
-import android.database.Cursor
-import android.net.Uri
 import android.os.Bundle
 import android.provider.ContactsContract
-import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,12 +24,15 @@ class ContactFragment : Fragment() {
 
     companion object {
         private const val HAS_PHONE = "1"
+        private const val CONTACT_LIKE = "contactLike"
     }
 
     private lateinit var rcvContact: RecyclerView
     private lateinit var adapterContact: ItemContactAdapter
 
     private val listContact = arrayListOf<ContactModel>()
+
+    private var sharePref: SharedPreferences? = null
 
     private var resultReadContact =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { result ->
@@ -54,6 +56,9 @@ class ContactFragment : Fragment() {
     }
 
     private fun checkPermission() {
+        //get SharedPreferences
+        sharePref = requireActivity().getPreferences(Context.MODE_PRIVATE)
+
         val permissionCheck = ContextCompat.checkSelfPermission(
             requireActivity(),
             Manifest.permission.READ_CONTACTS
@@ -64,6 +69,10 @@ class ContactFragment : Fragment() {
                 resultReadContact.launch(Manifest.permission.READ_CONTACTS)
             }
         }
+
+        //Internal storage -> app
+        //
+        //        //External storage -> system
     }
 
     private fun initView(view: View) {
@@ -74,6 +83,7 @@ class ContactFragment : Fragment() {
 
     private fun initRecyclerView() {
         adapterContact = ItemContactAdapter(listContact) {
+            updateStatusContact(it)
         }
         rcvContact.adapter = adapterContact
         rcvContact.layoutManager = LinearLayoutManager(requireActivity())
@@ -91,21 +101,22 @@ class ContactFragment : Fragment() {
                         val model = ContactModel()
                         model.name =
                             it.getString(it.getColumnIndex(ContactsContract.Contacts.DISPLAY_NAME))
-//                        val photo =
-//                            it.getString(it.getColumnIndex(ContactsContract.Contacts.PHOTO_URI))
-//                        photo?.let { pt ->
-//                            model.image = pt
-////                            model.image = getRealPathFromURI(Uri.parse(pt)) ?: ""
-//                        }
+
+                        val photo =
+                            it.getString(it.getColumnIndex(ContactsContract.Contacts.PHOTO_URI))
+                        photo?.let { pt -> model.image = pt }
+
                         val hasPhone =
                             it.getString(it.getColumnIndex(ContactsContract.Contacts.HAS_PHONE_NUMBER))
-                        if (hasPhone == HAS_PHONE) {
-                            val id = it.getString(it.getColumnIndex(ContactsContract.Contacts._ID))
-                            readPhoneNumber(model, id)
-                        }
+
+                        val id = it.getString(it.getColumnIndex(ContactsContract.Contacts._ID))
+                        model.idPhoto = id
+
+                        if (hasPhone == HAS_PHONE) readPhoneNumber(model, id)
 
                         listContact.add(model)
                     }
+                    loadContactLike()
                     adapterContact.notifyItemRangeInserted(0, listContact.size - 1)
                 }
             }
@@ -135,21 +146,39 @@ class ContactFragment : Fragment() {
         }
     }
 
-    fun getRealPathFromURI(contentUri: Uri): String? {
-        var path: String? = null
-        val proj = arrayOf(MediaStore.MediaColumns.DATA)
-        val cursor: Cursor? =
-            requireContext().contentResolver.query(contentUri, proj, null, null, null)
-        cursor?.let {
-            if (cursor.moveToFirst()) {
-                val column_index: Int = cursor.getColumnIndexOrThrow(MediaStore.MediaColumns.DATA)
-                path = cursor.getString(column_index)
+    private fun updateStatusContact(index: Int) {
+        val itemSelected = listContact[index]
+        itemSelected.statusLike = !itemSelected.statusLike
+        adapterContact.notifyItemChanged(index)
+        saveContactLike()
+    }
+
+    private fun saveContactLike() {
+        sharePref?.let {
+            val listSelected =
+                listContact.filter { item -> item.statusLike }.map { item -> item.idPhoto }.toList()
+            val result = listSelected.joinToString(",") //[1,3,4] => 1,3,4
+            with(it.edit()) {
+//                putInt()
+//                putBoolean()
+//                putFloat()
+//                putLong()
+                putString(CONTACT_LIKE, result)
+                apply()
             }
         }
-        cursor?.close()
-        return path
     }
-    /*
 
-    * */
+    private fun loadContactLike() {
+        sharePref?.let { pref ->
+            val listStringId = pref.getString(CONTACT_LIKE, "")  //1,3,4
+            val listContactSelected = listStringId?.split(",") //[1,3,4]
+            listContactSelected?.forEach { id ->
+                listContact.firstOrNull { it.idPhoto == id }?.let {
+                    it.statusLike = true
+                }
+            }
+        }
+    }
+
 }
